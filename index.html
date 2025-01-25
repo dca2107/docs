@@ -62,14 +62,14 @@
         }
         .categories {
             display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            gap: 15px;
+            flex-direction: column;
+            gap: 20px;
             margin-top: 20px;
+            width: 100%;
         }
         .category {
+            width: 100%;
             margin-bottom: 20px;
-            width: 300px;
         }
         .category h3 {
             font-size: 24px;
@@ -77,43 +77,42 @@
             margin-bottom: 10px;
             text-transform: uppercase;
         }
-        .channel-container {
-            background-color: #222;
-            border-radius: 10px;
-            padding: 10px;
+        .channel-row {
             display: flex;
-            flex-direction: column;
+            justify-content: flex-start;
             align-items: center;
-            width: 100%;
+            gap: 20px;
+            margin-bottom: 20px;
+            background-color: #222;
+            padding: 10px;
+            border-radius: 10px;
         }
         .channel {
             background-color: #333;
-            padding: 20px;
-            margin-bottom: 10px;
+            padding: 15px 30px;
             border-radius: 5px;
             cursor: pointer;
-            width: 100%;
+            width: auto;
             text-align: center;
-            transition: background-color 0.3s ease;
             font-size: 18px;
+            transition: background-color 0.3s ease;
         }
         .channel:hover {
             background-color: #444;
         }
-        .schedule {
+        .programs {
+            display: flex;
+            gap: 20px;
+            flex-grow: 1;
+        }
+        .program {
             background-color: #444;
-            padding: 10px;
+            padding: 10px 15px;
             border-radius: 5px;
             color: #fff;
-            margin-top: 10px;
-            width: 100%;
-        }
-        .schedule h4 {
+            text-align: center;
             font-size: 16px;
-            margin-bottom: 5px;
-        }
-        .schedule p {
-            margin: 0;
+            flex-shrink: 0;
         }
     </style>
 </head>
@@ -145,13 +144,12 @@
             <!-- Categoría Nacional -->
             <div class="category">
                 <h3>Nacional</h3>
-                <div class="channel-container">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/streams/SV-2.m3u8')">CA 2</div>
-                    <div class="schedule">
-                        <h4>Programación:</h4>
-                        <p><strong>16:00</strong> - CA Noticias</p>
-                        <p><strong>17:00</strong> - CA Cine</p>
-                        <p><strong>18:00</strong> - CA Música</p>
+                <div class="channel-row">
+                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-2.m3u8')">CA 2</div>
+                    <div class="programs">
+                        <div class="program">16:00 - CA Noticias</div>
+                        <div class="program">17:00 - CA Cine</div>
+                        <div class="program">18:00 - CA Música</div>
                     </div>
                 </div>
             </div>
@@ -159,13 +157,12 @@
             <!-- Categoría Internacional -->
             <div class="category">
                 <h3>Internacional</h3>
-                <div class="channel-container">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/streams/SV-6.m3u8')">Internacional 1</div>
-                    <div class="schedule">
-                        <h4>Programación:</h4>
-                        <p><strong>14:00</strong> - Show Internacional</p>
-                        <p><strong>16:00</strong> - Noticias Globales</p>
-                        <p><strong>18:00</strong> - Mundo de Películas</p>
+                <div class="channel-row">
+                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-12.m3u8')">Internacional 1</div>
+                    <div class="programs">
+                        <div class="program">14:00 - Show Internacional</div>
+                        <div class="program">16:00 - Noticias Globales</div>
+                        <div class="program">18:00 - Mundo de Películas</div>
                     </div>
                 </div>
             </div>
@@ -173,17 +170,16 @@
             <!-- Categoría Deportes -->
             <div class="category">
                 <h3>Deportes</h3>
-                <div class="channel-container">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/streams/SV-12.m3u8')">Deportes 1</div>
-                    <div class="schedule">
-                        <h4>Programación:</h4>
-                        <p><strong>15:00</strong> - Partido de Fútbol</p>
-                        <p><strong>17:00</strong> - Resumen Deportivo</p>
+                <div class="channel-row">
+                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-6.m3u8')">Deportes 1</div>
+                    <div class="programs">
+                        <div class="program">15:00 - Partido de Fútbol</div>
+                        <div class="program">17:00 - Resumen Deportivo</div>
                     </div>
                 </div>
             </div>
 
-            <!-- Agregar más categorías si es necesario -->
+            <!-- Puedes agregar más categorías y canales -->
         </div>
     </div>
 
