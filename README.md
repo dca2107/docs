@@ -1,4 +1,4 @@
-***Descargo de responsabilidad legal:***
+<h1>***Descargo de responsabilidad legal:***</h1>
 
 Este repositorio no almacena archivos de video. El repositorio contiene únicamente enlaces proporcionados por usuarios a URLs de transmisiones de video públicamente disponibles, que, según nuestro conocimiento, han sido puestas a disposición de manera intencional por los titulares de derechos de autor. Si algún enlace en estas listas infringe sus derechos como titular de derechos de autor, podrá solicitar su eliminación mediante una solicitud de extracción (pull request) o abriendo un problema (issue). Sin embargo, tenga en cuenta que no tenemos control sobre el destino de los enlaces y, al eliminar un enlace de la lista, no se eliminará su contenido de la web. Además, el simple hecho de enlazar no infringe los derechos de autor, ya que no se realiza ninguna copia en el sitio que provee el enlace, por lo que este no constituye un motivo válido para enviar un aviso DMCA a GitHub. Para eliminar este contenido de la web, debe contactar al proveedor de servicios de alojamiento que realmente está hospedando el contenido (no GitHub, ni los mantenedores de este repositorio).
 
