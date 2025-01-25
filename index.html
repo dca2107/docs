@@ -86,13 +86,15 @@
             background-color: #222;
             padding: 10px;
             border-radius: 10px;
+            width: 100%;
         }
         .channel {
             background-color: #333;
-            padding: 15px 30px;
+            width: calc(50% - 20px); /* 50% width for two columns */
+            padding-top: 25%; /* Maintain 16:8 aspect ratio */
+            position: relative;
             border-radius: 5px;
             cursor: pointer;
-            width: auto;
             text-align: center;
             font-size: 18px;
             transition: background-color 0.3s ease;
@@ -100,10 +102,20 @@
         .channel:hover {
             background-color: #444;
         }
+        .channel img {
+            position: absolute;
+            top: 10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40%; /* Adjust logo size */
+            height: auto;
+        }
         .programs {
             display: flex;
-            gap: 20px;
+            gap: 15px;
             flex-grow: 1;
+            justify-content: center;
+            align-items: center;
         }
         .program {
             background-color: #444;
@@ -113,6 +125,7 @@
             text-align: center;
             font-size: 16px;
             flex-shrink: 0;
+            width: auto;
         }
     </style>
 </head>
@@ -145,7 +158,10 @@
             <div class="category">
                 <h3>Nacional</h3>
                 <div class="channel-row">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-2.m3u8')">CA 2</div>
+                    <div class="channel" onclick="changeChannel('https://path_to_channel_CA2.m3u8')">
+                        <img src="logo_ca2.png" alt="CA 2 Logo">
+                        CA 2
+                    </div>
                     <div class="programs">
                         <div class="program">16:00 - CA Noticias</div>
                         <div class="program">17:00 - CA Cine</div>
@@ -158,7 +174,10 @@
             <div class="category">
                 <h3>Internacional</h3>
                 <div class="channel-row">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-12.m3u8')">Internacional 1</div>
+                    <div class="channel" onclick="changeChannel('https://path_to_channel_int1.m3u8')">
+                        <img src="logo_int1.png" alt="Internacional 1 Logo">
+                        Internacional 1
+                    </div>
                     <div class="programs">
                         <div class="program">14:00 - Show Internacional</div>
                         <div class="program">16:00 - Noticias Globales</div>
@@ -171,7 +190,10 @@
             <div class="category">
                 <h3>Deportes</h3>
                 <div class="channel-row">
-                    <div class="channel" onclick="changeChannel('https://dca2107.github.io/ctv/hls/SV-6.m3u8')">Deportes 1</div>
+                    <div class="channel" onclick="changeChannel('https://path_to_channel_deportes1.m3u8')">
+                        <img src="logo_deportes1.png" alt="Deportes 1 Logo">
+                        Deportes 1
+                    </div>
                     <div class="programs">
                         <div class="program">15:00 - Partido de Fútbol</div>
                         <div class="program">17:00 - Resumen Deportivo</div>
