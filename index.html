@@ -4,15 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Fake WhatsApp Chat</title>
+    <!-- Cargar la fuente Roboto de Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div class="chat-container">
+        <!-- Barra de título (similar a WhatsApp) -->
         <div class="header">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/WhatsApp_logo_2023.png/1200px-WhatsApp_logo_2023.png" alt="WhatsApp Logo" class="logo">
             <h1>Chat Grupal</h1>
         </div>
 
-        <!-- Selector de usuario -->
+        <!-- Ventana del chat -->
+        <div class="chat-window" id="chat-window">
+            <div class="message-container" id="message-container">
+                <!-- Mensajes se mostrarán aquí -->
+            </div>
+        </div>
+
+        <!-- Selector de usuario (a quién se le mandan los mensajes) -->
         <div class="user-selector">
             <label for="user-selector">Elige un usuario:</label>
             <select id="user-selector">
@@ -21,17 +32,12 @@
             </select>
         </div>
 
-        <!-- Ventana del chat -->
-        <div class="chat-window" id="chat-window">
-            <div class="message-container" id="message-container">
-                <!-- Los mensajes se mostrarán aquí -->
-            </div>
-        </div>
-
-        <!-- Campo para escribir mensaje -->
+        <!-- Caja de entrada de mensaje -->
         <div class="message-input">
             <input type="text" id="message-input" placeholder="Escribe un mensaje..." />
-            <button onclick="sendMessage()">Enviar</button>
+            <button onclick="sendMessage()">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/WhatsApp_Logo.svg/1200px-WhatsApp_Logo.svg.png" alt="Enviar" class="send-icon">
+            </button>
         </div>
     </div>
 
