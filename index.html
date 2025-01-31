@@ -3,165 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Reloj y Mapa Mundi</title>
-    <link href="https://fonts.googleapis.com/css2?family=Geologica:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-    <style>
-        body {
-            font-family: 'Geologica', sans-serif;
-            margin: 0;
-            padding: 0;
-            height: 100vh;
-            background-color: #111;
-            color: white;
-            overflow: hidden;
-            position: relative;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-        }
-
-        #map {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            z-index: -1;
-            filter: brightness(0.5); /* Hace que el mapa se vea con menor brillo */
-        }
-
-        .clock-container {
-            position: absolute;
-            top: 20%;
-            text-align: center;
-            z-index: 10;
-        }
-
-        .clock {
-            font-size: 90px;
-            font-weight: bold;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 20px 40px;
-            border-radius: 15px;
-            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.7);
-            margin-bottom: 10px;
-        }
-
-        .day {
-            font-size: 30px;
-            font-weight: 400;
-            background-color: rgba(0, 0, 0, 0.6);
-            padding: 10px 20px;
-            border-radius: 15px;
-        }
-
-        .calendar-container {
-            position: absolute;
-            bottom: 20%;
-            z-index: 10;
-            width: 80%;
-            max-width: 500px;
-        }
-
-        .calendar-container .flatpickr-calendar {
-            background-color: rgba(0, 0, 0, 0.8);
-            color: white;
-            border-radius: 10px;
-        }
-
-        .calendar-container .flatpickr-day:hover {
-            background-color: #f39c12;
-            cursor: pointer;
-        }
-
-        .calendar-container .flatpickr-day.selected {
-            background-color: #f39c12;
-            color: black;
-        }
-    </style>
+    <title>Fake WhatsApp Chat</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
+    <div class="chat-container">
+        <div class="header">
+            <h1>Chat Grupal</h1>
+        </div>
 
-<div id="map"></div>
+        <!-- Selector de usuario -->
+        <div class="user-selector">
+            <label for="user-selector">Elige un usuario:</label>
+            <select id="user-selector">
+                <option value="you">Tú</option>
+                <option value="other">Otra Persona</option>
+            </select>
+        </div>
 
-<div class="clock-container">
-    <!-- Reloj -->
-    <div class="clock" id="clock">00:00:00</div>
-    <!-- Día -->
-    <div class="day" id="day">Viernes, 25 de enero de 2025</div>
-</div>
+        <!-- Ventana del chat -->
+        <div class="chat-window" id="chat-window">
+            <div class="message-container" id="message-container">
+                <!-- Los mensajes se mostrarán aquí -->
+            </div>
+        </div>
 
-<!-- Calendario -->
-<div class="calendar-container">
-    <input type="text" id="calendar" class="flatpickr" />
-</div>
+        <!-- Campo para escribir mensaje -->
+        <div class="message-input">
+            <input type="text" id="message-input" placeholder="Escribe un mensaje..." />
+            <button onclick="sendMessage()">Enviar</button>
+        </div>
+    </div>
 
-<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/moment@2.29.1/moment.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
-<script>
-    // Inicializar el mapa
-    var map = L.map('map').setView([0, 0], 2);
-
-    // Agregar el mapa de fondo con un estilo bonito y sencillo
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(map);
-
-    // Función para actualizar el reloj
-    function updateClock() {
-        const clock = document.getElementById('clock');
-        const day = document.getElementById('day');
-        const now = moment();
-        const time = now.format('HH:mm:ss');
-        const dayOfWeek = now.format('dddd');
-        const date = now.format('DD [de] MMMM [de] YYYY');
-
-        clock.innerHTML = `<span>${time}</span>`;
-        day.innerHTML = `${dayOfWeek}, ${date}`;
-    }
-
-    // Función para actualizar el mapa, mostrando el día y la noche
-    function updateMap() {
-        const now = moment();
-        const lat = now.latitude || 0;  // Latitud central del mapa
-        const lon = now.longitude || 0; // Longitud central del mapa
-
-        // Determinar la ubicación del sol usando la hora
-        var sunPosition = moment.utc().format('X') / 86400; // Día de 24 horas en formato decimal
-
-        // Mostrar la "noche" y el "día" usando círculos, como una representación simplificada
-        var dayCircle = L.circle([lat, lon], {
-            color: 'yellow',
-            fillColor: 'yellow',
-            fillOpacity: 0.3,
-            radius: 1000000  // Radio representando la zona iluminada
-        }).addTo(map);
-
-        // Establecer la visibilidad y la sombra
-        dayCircle.setStyle({ fillOpacity: sunPosition });
-    }
-
-    // Ejecutar la actualización del reloj y el mapa
-    setInterval(function() {
-        updateClock();
-        updateMap();
-    }, 1000);  // Actualización cada segundo
-
-    // Inicializar el reloj
-    updateClock();
-
-    // Inicializar el calendario con flatpickr
-    flatpickr("#calendar", {
-        locale: "es",
-        dateFormat: "d-m-Y",
-        maxDate: "today",
-    });
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
