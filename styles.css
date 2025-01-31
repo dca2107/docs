@@ -1,76 +1,128 @@
+/* Fuente Roboto para asemejarse a WhatsApp */
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
+    font-family: 'Roboto', sans-serif;
+    background-color: #e5ddd5;
     margin: 0;
     padding: 0;
 }
 
+/* Contenedor principal */
 .chat-container {
     width: 100%;
-    max-width: 600px;
+    max-width: 500px;
     margin: 0 auto;
     background-color: white;
     padding: 10px;
-    border-radius: 8px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
 }
 
+/* Barra superior (típica de WhatsApp) */
 .header {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.user-selector {
-    text-align: center;
-    margin-bottom: 20px;
-}
-
-.chat-window {
-    max-height: 400px;
-    overflow-y: scroll;
-    margin-bottom: 20px;
-    border: 1px solid #ddd;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #075e54;
     padding: 10px;
-    border-radius: 8px;
-    background-color: #e8e8e8;
+    color: white;
+    border-radius: 10px;
+}
+
+.logo {
+    width: 30px;
+    height: 30px;
+}
+
+h1 {
+    font-size: 18px;
+    margin: 0;
+    flex-grow: 1;
+    text-align: center;
+}
+
+/* Ventana de chat */
+.chat-window {
+    flex-grow: 1;
+    padding: 10px;
+    background-color: #f4f4f4;
+    border-radius: 10px;
+    overflow-y: scroll;
 }
 
 .message-container {
-    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
+/* Estilo de los mensajes */
 .message {
+    max-width: 75%;
     padding: 10px;
-    margin-bottom: 10px;
-    border-radius: 8px;
-    max-width: 80%;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.5;
     display: inline-block;
 }
 
 .you {
     background-color: #dcf8c6;
-    text-align: left;
+    align-self: flex-start;
 }
 
 .other {
     background-color: #ffffff;
-    text-align: right;
     align-self: flex-end;
+    border: 1px solid #ddd;
+}
+
+/* Caja de entrada de mensaje */
+.message-input {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+    border-radius: 10px;
+    background-color: #ffffff;
+    margin-top: 10px;
 }
 
 .message-input input {
-    width: 80%;
+    width: 90%;
     padding: 10px;
-    border-radius: 8px;
+    font-size: 14px;
     border: 1px solid #ddd;
-    margin-right: 10px;
+    border-radius: 10px;
 }
 
 .message-input button {
-    padding: 10px 20px;
-    background-color: #34b7f1;
+    background: none;
     border: none;
-    color: white;
-    cursor: pointer;
-    border-radius: 8px;
+    padding: 0;
+}
+
+.send-icon {
+    width: 25px;
+    height: 25px;
+}
+
+/* Selector de usuario */
+.user-selector {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 10px;
+}
+
+.user-selector label {
+    font-size: 14px;
+    margin-bottom: 5px;
+}
+
+.user-selector select {
+    padding: 5px;
+    font-size: 14px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
 }
