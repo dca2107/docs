@@ -1,39 +1,38 @@
-// Datos simulados
+// Datos de los usuarios
 const users = {
     you: {
         name: "Tú",
-        photo: "your-photo.jpg", // Puedes cambiar por una foto de tu elección
+        photo: "https://upload.wikimedia.org/wikipedia/commons/a/a1/WhatsApp_logo.png" // Cambia por tu foto
     },
     other: {
         name: "Otro Usuario",
-        photo: "other-photo.jpg", // Foto de otra persona ficticia
+        photo: "https://upload.wikimedia.org/wikipedia/commons/a/a1/WhatsApp_logo.png" // Cambia por una foto ficticia
     }
 };
 
-// Función para cambiar el usuario y mostrar el mensaje con el perfil adecuado
+// Función para enviar un mensaje
 function sendMessage() {
     const userSelector = document.getElementById('user-selector');
     const user = userSelector.value;
     
-    // Obtener mensaje del campo de texto
     const messageInput = document.getElementById('message-input');
     const messageText = messageInput.value;
     
-    if (messageText.trim() === "") return; // No enviar mensaje vacío
+    if (messageText.trim() === "") return; // No enviar si está vacío
     
-    // Crear mensaje en el chat
     const messageContainer = document.getElementById('message-container');
     const messageElement = document.createElement('div');
     messageElement.classList.add('message', user === 'you' ? 'you' : 'other');
     
     messageElement.innerHTML = `
-        <strong>${users[user].name}</strong>
-        <p>${messageText}</p>
+        <div class="message-content">
+            <p>${messageText}</p>
+        </div>
     `;
     
     messageContainer.appendChild(messageElement);
     
-    // Limpiar el campo de mensaje
+    // Limpiar el campo de entrada de mensaje
     messageInput.value = "";
     
     // Hacer que el chat se desplace al final
