@@ -1,40 +1,37 @@
-// Datos de los usuarios
-const users = {
-    you: {
-        name: "Tú",
-        photo: "https://upload.wikimedia.org/wikipedia/commons/a/a1/WhatsApp_logo.png" // Cambia por tu foto
-    },
-    other: {
-        name: "Otro Usuario",
-        photo: "https://upload.wikimedia.org/wikipedia/commons/a/a1/WhatsApp_logo.png" // Cambia por una foto ficticia
-    }
-};
+// editorAccess.js
 
-// Función para enviar un mensaje
-function sendMessage() {
-    const userSelector = document.getElementById('user-selector');
-    const user = userSelector.value;
-    
-    const messageInput = document.getElementById('message-input');
-    const messageText = messageInput.value;
-    
-    if (messageText.trim() === "") return; // No enviar si está vacío
-    
-    const messageContainer = document.getElementById('message-container');
-    const messageElement = document.createElement('div');
-    messageElement.classList.add('message', user === 'you' ? 'you' : 'other');
-    
-    messageElement.innerHTML = `
-        <div class="message-content">
-            <p>${messageText}</p>
-        </div>
-    `;
-    
-    messageContainer.appendChild(messageElement);
-    
-    // Limpiar el campo de entrada de mensaje
-    messageInput.value = "";
-    
-    // Hacer que el chat se desplace al final
-    messageContainer.scrollTop = messageContainer.scrollHeight;
-}
+document.addEventListener('DOMContentLoaded', function() {
+  // Credenciales válidas
+  const validUsername = "eyrdiscommv";
+  const validPassword = "eyr.discom.mv.2025";
+
+  // Seleccionar el formulario de login
+  const loginForm = document.getElementById('loginForm');
+
+  if (loginForm) {
+    loginForm.addEventListener('submit', function(event) {
+      event.preventDefault();
+
+      // Obtener valores ingresados en el formulario
+      const usernameInput = document.getElementById('username');
+      const passwordInput = document.getElementById('password');
+      const username = usernameInput.value;
+      const password = passwordInput.value;
+
+      // Validar credenciales
+      if (username === validUsername && password === validPassword) {
+        alert('Acceso concedido. Bienvenido, editor.');
+
+        // Ejemplo: mostrar la sección de edición (asegúrate de tener un contenedor con id "editorSection")
+        const editorSection = document.getElementById('editorSection');
+        if (editorSection) {
+          editorSection.style.display = 'block';
+        }
+        // Opcional: ocultar el formulario de login
+        loginForm.style.display = 'none';
+      } else {
+        alert('Credenciales incorrectas. Inténtalo nuevamente.');
+      }
+    });
+  }
+});
