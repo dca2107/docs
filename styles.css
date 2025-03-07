@@ -1,128 +1,138 @@
-/* Fuente Roboto para asemejarse a WhatsApp */
+/* Reset básico */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 body {
-    font-family: 'Roboto', sans-serif;
-    background-color: #e5ddd5;
-    margin: 0;
-    padding: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f5f5f5;
+  padding: 20px;
 }
 
-/* Contenedor principal */
-.chat-container {
-    width: 100%;
-    max-width: 500px;
-    margin: 0 auto;
-    background-color: white;
-    padding: 10px;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
+header, nav, .content, .editor-section {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
-/* Barra superior (típica de WhatsApp) */
-.header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: #075e54;
-    padding: 10px;
-    color: white;
-    border-radius: 10px;
+header {
+  margin-bottom: 20px;
 }
 
-.logo {
-    width: 30px;
-    height: 30px;
+nav {
+  background-color: #333;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+  margin-bottom: 20px;
 }
 
-h1 {
-    font-size: 18px;
-    margin: 0;
-    flex-grow: 1;
-    text-align: center;
+nav a {
+  color: #fff;
+  text-decoration: none;
+  margin: 0 10px;
 }
 
-/* Ventana de chat */
-.chat-window {
-    flex-grow: 1;
-    padding: 10px;
-    background-color: #f4f4f4;
-    border-radius: 10px;
-    overflow-y: scroll;
+article {
+  background: #fff;
+  padding: 15px;
+  margin-bottom: 15px;
+  border: 1px solid #ccc;
 }
 
-.message-container {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+/* Botón semi escondido para redactores */
+#redactor-tools-btn {
+  position: fixed;
+  bottom: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #333;
+  color: #fff;
+  padding: 8px 16px;
+  border: none;
+  cursor: pointer;
+  font-size: 14px;
 }
 
-/* Estilo de los mensajes */
-.message {
-    max-width: 75%;
-    padding: 10px;
-    border-radius: 10px;
-    font-size: 14px;
-    line-height: 1.5;
-    display: inline-block;
+/* Modal de Login */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0,0,0,0.5);
 }
 
-.you {
-    background-color: #dcf8c6;
-    align-self: flex-start;
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  width: 300px;
+  border: 1px solid #ccc;
 }
 
-.other {
-    background-color: #ffffff;
-    align-self: flex-end;
-    border: 1px solid #ddd;
+/* Menú de redactores */
+.redactor-menu {
+  display: none;
+  text-align: center;
+  margin: 20px 0;
 }
 
-/* Caja de entrada de mensaje */
-.message-input {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 10px;
-    border-radius: 10px;
-    background-color: #ffffff;
-    margin-top: 10px;
+.redactor-menu button {
+  margin: 10px;
+  padding: 10px 20px;
+  background-color: #333;
+  color: #fff;
+  border: none;
+  cursor: pointer;
 }
 
-.message-input input {
-    width: 90%;
-    padding: 10px;
-    font-size: 14px;
-    border: 1px solid #ddd;
-    border-radius: 10px;
+/* Secciones de edición y redacción */
+.editor-content {
+  background: #fff;
+  padding: 15px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
 }
 
-.message-input button {
-    background: none;
-    border: none;
-    padding: 0;
+/* Lista de artículos */
+.article-list {
+  list-style: none;
 }
 
-.send-icon {
-    width: 25px;
-    height: 25px;
+.article-list li {
+  padding: 10px;
+  border-bottom: 1px solid #ccc;
+  cursor: pointer;
 }
 
-/* Selector de usuario */
-.user-selector {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+.article-list li:hover {
+  background-color: #ddd;
 }
 
-.user-selector label {
-    font-size: 14px;
-    margin-bottom: 5px;
+/* Editor de artículo */
+.editor-toolbar {
+  background-color: #eee;
+  padding: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 10px;
 }
 
-.user-selector select {
-    padding: 5px;
-    font-size: 14px;
-    border-radius: 5px;
-    border: 1px solid #ddd;
+.editor-toolbar button {
+  margin-right: 5px;
+  padding: 5px 10px;
+  border: 1px solid #ccc;
+  background: #fff;
+  cursor: pointer;
+}
+
+.editor-area {
+  min-height: 300px;
+  border: 1px solid #ccc;
+  background: #fff;
+  padding: 10px;
 }
