@@ -2,8 +2,10 @@
 <html lang="es">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Periódico Digital</title>
+  <!-- Fuente moderna -->
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -13,20 +15,22 @@
   </header>
 
   <nav>
-    <a href="#">Inicio</a>
-    <a href="#">Noticias</a>
-    <a href="#">Opinión</a>
+    <ul>
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#">Noticias</a></li>
+      <li><a href="#">Opinión</a></li>
+    </ul>
   </nav>
 
-  <div class="content">
+  <main class="content">
     <!-- Contenido público: Ejemplo de artículo -->
     <article>
       <h2>Título del Artículo</h2>
       <p>Este es un ejemplo de artículo de nuestro periódico digital. Aquí se mostrará el contenido para los lectores.</p>
     </article>
-  </div>
+  </main>
 
-  <!-- Botón semi escondido para acceder a las herramientas de redactores -->
+  <!-- Botón semi escondido para redactores -->
   <button id="redactor-tools-btn">Herramientas para redactores</button>
 
   <!-- Modal de Login para redactores -->
@@ -34,22 +38,23 @@
     <div class="modal-content">
       <h3>Acceso para redactores</h3>
       <form id="loginForm">
-        <label for="username">Usuario:</label><br>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Contraseña:</label><br>
-        <input type="password" id="password" name="password" required><br><br>
+        <label for="username">Usuario:</label>
+        <input type="text" id="username" name="username" required>
+        <label for="password">Contraseña:</label>
+        <input type="password" id="password" name="password" required>
         <button type="submit">Ingresar</button>
       </form>
     </div>
   </div>
 
-  <!-- Sección de herramientas para redactores (inicialmente oculta) -->
-  <div id="editorSection" class="editor-section" style="display: none;">
+  <!-- Panel de herramientas para redactores (inicialmente oculto) -->
+  <section id="editorSection" class="editor-section" style="display: none;">
     <div id="redactorMenu" class="redactor-menu">
       <button id="editArticleBtn"><span>📝</span> Editar artículo</button>
       <button id="newArticleBtn"><span>✏️</span> Redactar artículo</button>
       <button id="logoutBtn"><span>🔒</span> Cerrar sesión</button>
     </div>
+
     <!-- Sección para editar artículos -->
     <div id="editSection" class="editor-content" style="display: none;">
       <h2>Editar Artículo</h2>
@@ -60,11 +65,11 @@
         <li data-id="3">Artículo 3</li>
       </ul>
     </div>
+
     <!-- Sección para redactar un nuevo artículo -->
     <div id="newArticleSection" class="editor-content" style="display: none;">
       <h2>Redactar Nuevo Artículo</h2>
       <div class="editor-toolbar">
-        <!-- Botones para formato básico -->
         <button type="button" onclick="formatText('bold')">Negrita</button>
         <button type="button" onclick="formatText('italic')">Cursiva</button>
         <button type="button" onclick="formatText('underline')">Subrayado</button>
@@ -72,12 +77,11 @@
       <div id="editor" class="editor-area" contenteditable="true">
         Escribe aquí tu artículo...
       </div>
-      <br>
-      <label for="tags">Etiquetas (separadas por coma):</label><br>
-      <input type="text" id="tags" name="tags" placeholder="ej. política, economía, deportes"><br><br>
+      <label for="tags">Etiquetas (separadas por coma):</label>
+      <input type="text" id="tags" name="tags" placeholder="ej. política, economía, deportes">
       <button type="button" onclick="saveArticle()">Guardar Artículo</button>
     </div>
-  </div>
+  </section>
 
   <!-- Incluir scripts -->
   <script src="editorAccess.js"></script>
