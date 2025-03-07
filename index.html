@@ -9,7 +9,6 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
   <header>
     <h1>Periódico Digital</h1>
   </header>
@@ -23,14 +22,22 @@
   </nav>
 
   <main class="content">
-    <!-- Contenido público: Ejemplo de artículo -->
+    <!-- Sección de Artículos Más Recientes -->
+    <section id="recentArticles">
+      <h2>Artículos Más Recientes</h2>
+      <div id="articlesList">
+        <!-- Se cargarán los artículos guardados -->
+      </div>
+    </section>
+
+    <!-- Contenido público (puedes agregar más secciones si lo requieres) -->
     <article>
-      <h2>Título del Artículo</h2>
-      <p>Este es un ejemplo de artículo de nuestro periódico digital. Aquí se mostrará el contenido para los lectores.</p>
+      <h2>Bienvenidos al Periódico Digital</h2>
+      <p>Este es el sitio público. Los artículos se publican aquí conforme se van guardando.</p>
     </article>
   </main>
 
-  <!-- Botón semi escondido para redactores -->
+  <!-- Botón semi escondido para acceder a las herramientas de redactores -->
   <button id="redactor-tools-btn">Herramientas para redactores</button>
 
   <!-- Modal de Login para redactores -->
@@ -47,39 +54,41 @@
     </div>
   </div>
 
-  <!-- Panel de herramientas para redactores (inicialmente oculto) -->
+  <!-- Panel de herramientas para redactores (oculto hasta autenticarse) -->
   <section id="editorSection" class="editor-section" style="display: none;">
+    <!-- Menú de redacción (por ahora se incluye solo la creación de artículo) -->
     <div id="redactorMenu" class="redactor-menu">
-      <button id="editArticleBtn"><span>📝</span> Editar artículo</button>
+      <!-- En este ejemplo nos enfocamos en redactar nuevos artículos -->
       <button id="newArticleBtn"><span>✏️</span> Redactar artículo</button>
       <button id="logoutBtn"><span>🔒</span> Cerrar sesión</button>
-    </div>
-
-    <!-- Sección para editar artículos -->
-    <div id="editSection" class="editor-content" style="display: none;">
-      <h2>Editar Artículo</h2>
-      <ul id="articleList" class="article-list">
-        <!-- Lista simulada de artículos -->
-        <li data-id="1">Artículo 1</li>
-        <li data-id="2">Artículo 2</li>
-        <li data-id="3">Artículo 3</li>
-      </ul>
     </div>
 
     <!-- Sección para redactar un nuevo artículo -->
     <div id="newArticleSection" class="editor-content" style="display: none;">
       <h2>Redactar Nuevo Artículo</h2>
+      <!-- Campo para el título del artículo -->
+      <label for="articleTitle">Título del Artículo:</label>
+      <input type="text" id="articleTitle" placeholder="Ingresa el título aquí">
+
+      <!-- Toolbar sticky: se queda fijo al hacer scroll en el editor -->
       <div class="editor-toolbar">
-        <button type="button" onclick="formatText('bold')">Negrita</button>
-        <button type="button" onclick="formatText('italic')">Cursiva</button>
-        <button type="button" onclick="formatText('underline')">Subrayado</button>
+        <button type="button" onclick="formatText('bold')" title="Negrita"><strong>N</strong></button>
+        <button type="button" onclick="formatText('italic')" title="Cursiva"><em>C</em></button>
+        <button type="button" onclick="formatText('underline')" title="Subrayado"><u>S</u></button>
+        <button type="button" onclick="formatText('justifyLeft')" title="Izquierda">Izq</button>
+        <button type="button" onclick="formatText('justifyCenter')" title="Centrado">Cen</button>
+        <button type="button" onclick="formatText('justifyRight')" title="Derecha">Der</button>
+        <button type="button" onclick="formatText('justifyFull')" title="Justificado">Just</button>
+        <button type="button" onclick="saveArticle()" title="Guardar">Guardar</button>
       </div>
+
+      <!-- Área editable para el contenido del artículo -->
       <div id="editor" class="editor-area" contenteditable="true">
         Escribe aquí tu artículo...
       </div>
+      <!-- Campo para etiquetas -->
       <label for="tags">Etiquetas (separadas por coma):</label>
-      <input type="text" id="tags" name="tags" placeholder="ej. política, economía, deportes">
-      <button type="button" onclick="saveArticle()">Guardar Artículo</button>
+      <input type="text" id="tags" placeholder="ej. política, economía, deportes">
     </div>
   </section>
 
