@@ -17,34 +17,31 @@
     </article>
     <a href="index.html">Volver al inicio</a>
   </main>
-
   <script>
-    // Función para obtener parámetros de la URL
     function getQueryParam(param) {
       const params = new URLSearchParams(window.location.search);
       return params.get(param);
     }
-
-    // Obtener el id del artículo
     const articleId = getQueryParam('id');
-
-    if (articleId) {
-      // Leer artículos del localStorage
-      const articles = JSON.parse(localStorage.getItem('articles') || '[]');
-      const article = articles.find(a => a.id === articleId);
-      if (article) {
-        const previewDiv = document.getElementById('previewArticle');
-        previewDiv.innerHTML = `
-          <h2>${article.title}</h2>
-          <p class="article-date">${article.date}</p>
-          <div>${article.content}</div>
-          <p class="article-tags"><strong>Etiquetas:</strong> ${article.tags}</p>
-        `;
-      } else {
-        document.getElementById('previewArticle').innerHTML = '<p>Artículo no encontrado.</p>';
-      }
+    // Si se pasa "draft=true" se busca en borradores, de lo contrario en artículos publicados
+    const isDraft = getQueryParam('draft') === 'true';
+    let articles = [];
+    if(isDraft){
+      articles = JSON.parse(localStorage.getItem('drafts') || '[]');
     } else {
-      document.getElementById('previewArticle').innerHTML = '<p>No se proporcionó un ID de artículo.</p>';
+      articles = JSON.parse(localStorage.getItem('articles') || '[]');
+    }
+    const article = articles.find(a => a.id === articleId);
+    if (article) {
+      const previewDiv = document.getElementById('previewArticle');
+      previewDiv.innerHTML = `
+        <h2>${article.title}</h2>
+        <p class="article-date">${article.date}</p>
+        <div>${article.content}</div>
+        <p class="article-tags"><strong>Etiquetas:</strong> ${article.tags}</p>
+      `;
+    } else {
+      document.getElementById('previewArticle').innerHTML = '<p>Artículo no encontrado.</p>';
     }
   </script>
 </body>
