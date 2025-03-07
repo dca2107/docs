@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Borradores - Periódico Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Borradores</h1>
+  </header>
+  <main class="content">
+    <section id="draftsSection">
+      <h2>Lista de Borradores</h2>
+      <div id="draftsList">
+        <!-- Se cargarán los borradores -->
+      </div>
+    </section>
+    <a href="index.html">Volver al inicio</a>
+  </main>
+  <script>
+    function loadDrafts() {
+      const draftsListDiv = document.getElementById('draftsList');
+      const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+      let html = '';
+      drafts.forEach(draft => {
+        html += `
+          <div class="article-item" onclick="window.location.href='preview.html?id=${draft.id}&draft=true'">
+            <h3>${draft.title}</h3>
+            <p class="article-date">${draft.date}</p>
+          </div>
+        `;
+      });
+      draftsListDiv.innerHTML = html;
+    }
+    loadDrafts();
+  </script>
+</body>
+</html>
