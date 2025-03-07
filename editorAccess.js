@@ -13,12 +13,9 @@ document.addEventListener('DOMContentLoaded', function() {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       if (username === validUsername && password === validPassword) {
-        // Acceso concedido: ocultar modal y mostrar panel del editor
-        document.getElementById('loginModal').style.display = 'none';
-        document.getElementById('editorSection').style.display = 'block';
-        // Mostrar solo la sección para redactar artículo (en este ejemplo)
-        document.getElementById('newArticleSection').style.display = 'block';
-        loginForm.reset();
+        // Marcar sesión (simulación) y redirigir a editor.html
+        localStorage.setItem('loggedIn', 'true');
+        window.location.href = "editor.html";
       } else {
         alert('Credenciales incorrectas. Inténtalo nuevamente.');
       }
