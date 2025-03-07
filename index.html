@@ -1,46 +1,289 @@
 <!DOCTYPE html>
 <html lang="es">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fake WhatsApp Chat</title>
-    <!-- Cargar la fuente Roboto de Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="styles.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Periódico Digital</title>
+  <style>
+    /* Reset básico */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f5f5f5;
+      padding: 20px;
+    }
+    header, nav, .content {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    header {
+      margin-bottom: 20px;
+    }
+    nav {
+      background-color: #333;
+      color: #fff;
+      padding: 10px;
+      text-align: center;
+      margin-bottom: 20px;
+    }
+    nav a {
+      color: #fff;
+      text-decoration: none;
+      margin: 0 10px;
+    }
+    article {
+      background: #fff;
+      padding: 15px;
+      margin-bottom: 15px;
+      border: 1px solid #ccc;
+    }
+    /* Botón semi escondido para herramientas de redactores */
+    #redactor-tools-btn {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 5px 10px;
+      border: none;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    /* Modal de Login */
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0,0,0,0.5);
+    }
+    .modal-content {
+      background-color: #fff;
+      margin: 10% auto;
+      padding: 20px;
+      width: 300px;
+      border: 1px solid #ccc;
+    }
+    /* Menú de herramientas para redactores */
+    .redactor-menu {
+      display: none;
+      margin: 20px auto;
+      max-width: 800px;
+      text-align: center;
+    }
+    .redactor-menu button {
+      margin: 10px;
+      padding: 10px 20px;
+      background-color: #333;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+    }
+    /* Secciones de edición y redacción */
+    .editor-section {
+      display: none;
+      max-width: 800px;
+      margin: 20px auto;
+      background: #fff;
+      padding: 15px;
+      border: 1px solid #ccc;
+    }
+    /* Lista de artículos */
+    .article-list {
+      list-style: none;
+    }
+    .article-list li {
+      padding: 10px;
+      border-bottom: 1px solid #ccc;
+      cursor: pointer;
+    }
+    .article-list li:hover {
+      background-color: #ddd;
+    }
+    /* Editor de artículo */
+    .editor-toolbar {
+      background-color: #eee;
+      padding: 10px;
+      border: 1px solid #ccc;
+      margin-bottom: 10px;
+    }
+    .editor-toolbar button {
+      margin-right: 5px;
+      padding: 5px 10px;
+      border: 1px solid #ccc;
+      background: #fff;
+      cursor: pointer;
+    }
+    .editor-area {
+      min-height: 300px;
+      border: 1px solid #ccc;
+      background: #fff;
+      padding: 10px;
+    }
+  </style>
 </head>
 <body>
-    <div class="chat-container">
-        <!-- Barra de título (similar a WhatsApp) -->
-        <div class="header">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/a/a0/WhatsApp_logo_2023.png/1200px-WhatsApp_logo_2023.png" alt="WhatsApp Logo" class="logo">
-            <h1>Chat Grupal</h1>
-        </div>
 
-        <!-- Ventana del chat -->
-        <div class="chat-window" id="chat-window">
-            <div class="message-container" id="message-container">
-                <!-- Mensajes se mostrarán aquí -->
-            </div>
-        </div>
+  <header>
+    <h1>Nombre del Periódico Digital</h1>
+  </header>
 
-        <!-- Selector de usuario (a quién se le mandan los mensajes) -->
-        <div class="user-selector">
-            <label for="user-selector">Elige un usuario:</label>
-            <select id="user-selector">
-                <option value="you">Tú</option>
-                <option value="other">Otra Persona</option>
-            </select>
-        </div>
+  <nav>
+    <a href="#">Inicio</a> |
+    <a href="#">Noticias</a> |
+    <a href="#">Opinión</a>
+  </nav>
 
-        <!-- Caja de entrada de mensaje -->
-        <div class="message-input">
-            <input type="text" id="message-input" placeholder="Escribe un mensaje..." />
-            <button onclick="sendMessage()">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/56/WhatsApp_Logo.svg/1200px-WhatsApp_Logo.svg.png" alt="Enviar" class="send-icon">
-            </button>
-        </div>
+  <div class="content">
+    <!-- Ejemplo de artículo en la página principal -->
+    <article>
+      <h2>Título del artículo de ejemplo</h2>
+      <p>Contenido del artículo... Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+    </article>
+  </div>
+
+  <!-- Botón semi escondido -->
+  <button id="redactor-tools-btn">Herramientas para redactores</button>
+
+  <!-- Modal para el Login -->
+  <div id="loginModal" class="modal">
+    <div class="modal-content">
+      <h3>Acceso para redactores</h3>
+      <form id="loginForm">
+        <label for="username">Usuario:</label><br>
+        <input type="text" id="username" name="username" required><br><br>
+        <label for="password">Contraseña:</label><br>
+        <input type="password" id="password" name="password" required><br><br>
+        <button type="submit">Ingresar</button>
+      </form>
     </div>
+  </div>
 
-    <script src="script.js"></script>
+  <!-- Menú de herramientas para redactores -->
+  <div id="redactorMenu" class="redactor-menu">
+    <button id="editArticleBtn">
+      <span>📝</span> Editar artículo
+    </button>
+    <button id="newArticleBtn">
+      <span>✏️</span> Redactar artículo
+    </button>
+    <button id="logoutBtn">
+      <span>🔒</span> Cerrar sesión
+    </button>
+  </div>
+
+  <!-- Sección para editar artículos -->
+  <div id="editSection" class="editor-section">
+    <h2>Editar Artículo</h2>
+    <ul id="articleList" class="article-list">
+      <!-- Lista de artículos existentes (simulación) -->
+      <li data-id="1">Artículo 1</li>
+      <li data-id="2">Artículo 2</li>
+      <li data-id="3">Artículo 3</li>
+    </ul>
+  </div>
+
+  <!-- Sección para redactar un nuevo artículo -->
+  <div id="newArticleSection" class="editor-section">
+    <h2>Redactar Nuevo Artículo</h2>
+    <div class="editor-toolbar">
+      <!-- Botones de formato: se usa document.execCommand para formatear -->
+      <button type="button" onclick="formatText('bold')">Negrita</button>
+      <button type="button" onclick="formatText('italic')">Cursiva</button>
+      <button type="button" onclick="formatText('underline')">Subrayado</button>
+    </div>
+    <div id="editor" class="editor-area" contenteditable="true">
+      Escribe aquí tu artículo...
+    </div>
+    <br>
+    <label for="tags">Etiquetas (separadas por coma):</label><br>
+    <input type="text" id="tags" name="tags" placeholder="ej. política, economía, deportes"><br><br>
+    <button type="button" onclick="saveArticle()">Guardar Artículo</button>
+  </div>
+
+  <script>
+    // Credenciales permitidas (ejemplo; no recomendado para producción)
+    const validCredentials = {
+      "redactor1": "password1",
+      "editor1": "password2"
+    };
+
+    const redactorToolsBtn = document.getElementById('redactor-tools-btn');
+    const loginModal = document.getElementById('loginModal');
+    const loginForm = document.getElementById('loginForm');
+    const redactorMenu = document.getElementById('redactorMenu');
+    const editSection = document.getElementById('editSection');
+    const newArticleSection = document.getElementById('newArticleSection');
+    const logoutBtn = document.getElementById('logoutBtn');
+
+    // Mostrar modal de login al hacer clic en el botón semi escondido
+    redactorToolsBtn.addEventListener('click', () => {
+      loginModal.style.display = 'block';
+    });
+
+    // Validar login
+    loginForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      if (validCredentials[username] && validCredentials[username] === password) {
+        loginModal.style.display = 'none';
+        redactorMenu.style.display = 'block';
+      } else {
+        alert('Credenciales incorrectas');
+      }
+    });
+
+    // Función para aplicar formato al texto
+    function formatText(command) {
+      document.execCommand(command, false, null);
+    }
+
+    // Mostrar sección de editar artículo
+    document.getElementById('editArticleBtn').addEventListener('click', () => {
+      editSection.style.display = 'block';
+      newArticleSection.style.display = 'none';
+    });
+
+    // Mostrar sección de redactar artículo
+    document.getElementById('newArticleBtn').addEventListener('click', () => {
+      newArticleSection.style.display = 'block';
+      editSection.style.display = 'none';
+    });
+
+    // Función de "guardar" artículo (simulación)
+    function saveArticle() {
+      const content = document.getElementById('editor').innerHTML;
+      const tags = document.getElementById('tags').value;
+      // Aquí podrías enviar el contenido a una API o backend (por ejemplo, usando GitHub API)
+      alert('Artículo guardado (simulación):\nContenido: ' + content + '\nEtiquetas: ' + tags);
+      // Reiniciar el editor
+      document.getElementById('editor').innerHTML = '';
+      document.getElementById('tags').value = '';
+    }
+
+    // Función de logout para cerrar sesión
+    logoutBtn.addEventListener('click', () => {
+      redactorMenu.style.display = 'none';
+      editSection.style.display = 'none';
+      newArticleSection.style.display = 'none';
+    });
+
+    // Cerrar el modal si se hace clic fuera de él
+    window.onclick = (event) => {
+      if (event.target == loginModal) {
+        loginModal.style.display = 'none';
+      }
+    };
+  </script>
+
 </body>
 </html>
