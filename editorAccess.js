@@ -13,10 +13,11 @@ document.addEventListener('DOMContentLoaded', function() {
       const username = document.getElementById('username').value;
       const password = document.getElementById('password').value;
       if (username === validUsername && password === validPassword) {
-        alert('Acceso concedido. Bienvenido, editor.');
+        // Acceso concedido: ocultar modal y mostrar panel del editor
         document.getElementById('loginModal').style.display = 'none';
         document.getElementById('editorSection').style.display = 'block';
-        document.getElementById('redactorMenu').style.display = 'flex';
+        // Mostrar solo la sección para redactar artículo (en este ejemplo)
+        document.getElementById('newArticleSection').style.display = 'block';
         loginForm.reset();
       } else {
         alert('Credenciales incorrectas. Inténtalo nuevamente.');
