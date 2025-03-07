@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Editor - Periódico Digital</title>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Editor</h1>
+  </header>
+
+  <!-- Menú del editor -->
+  <nav class="editor-nav">
+    <button id="publishArticleBtn" title="Publicar artículo"><span>🚀</span></button>
+    <button id="draftsBtn" title="Ver borradores"><span>💾</span></button>
+    <button id="logoutBtn" title="Cerrar sesión"><span>🔒</span></button>
+  </nav>
+
+  <main class="editor-main">
+    <section id="newArticleSection" class="editor-content">
+      <h2>Publicar Nuevo Artículo</h2>
+      <!-- Campo para el título -->
+      <label for="articleTitle">Título del Artículo:</label>
+      <input type="text" id="articleTitle" placeholder="Ingresa el título aquí">
+
+      <!-- Toolbar sticky con botones de formato -->
+      <div class="editor-toolbar">
+        <button type="button" onclick="formatText('bold')" title="Negrita"><strong>N</strong></button>
+        <button type="button" onclick="formatText('italic')" title="Cursiva"><em>C</em></button>
+        <button type="button" onclick="formatText('underline')" title="Subrayado"><span style="text-decoration: underline;">S</span></button>
+        <button type="button" onclick="formatText('justifyLeft')" title="Alinear izquierda">⬅️</button>
+        <button type="button" onclick="formatText('justifyCenter')" title="Centrar">↔️</button>
+        <button type="button" onclick="formatText('justifyRight')" title="Alinear derecha">➡️</button>
+        <button type="button" onclick="formatText('justifyFull')" title="Justificar">⚖️</button>
+        <button type="button" onclick="publishArticle()" title="Publicar">🚀</button>
+        <button type="button" onclick="saveDraft()" title="Guardar borrador">💾</button>
+      </div>
+
+      <!-- Área editable para el contenido -->
+      <div id="editor" class="editor-area" contenteditable="true">
+        Escribe aquí tu artículo...
+      </div>
+      <!-- Campo para etiquetas -->
+      <label for="tags">Etiquetas (separadas por coma):</label>
+      <input type="text" id="tags" placeholder="ej. política, economía, deportes">
+    </section>
+  </main>
+
+  <script src="main.js"></script>
+  <script>
+    // Verificar si el usuario está autenticado (simulación usando localStorage)
+    if (!localStorage.getItem('loggedIn')) {
+      // Si no está autenticado, redirigir a la página pública
+      window.location.href = "index.html";
+    }
+  </script>
+</body>
+</html>
