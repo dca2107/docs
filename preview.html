@@ -16,12 +16,15 @@
       <!-- Se llenará con JavaScript -->
     </article>
     <a href="index.html">Volver al inicio</a>
+    <!-- Botón de editar -->
+    <button id="editArticleBtn" style="display:none;" onclick="editArticle()">Editar Artículo</button>
   </main>
   <script>
     function getQueryParam(param) {
       const params = new URLSearchParams(window.location.search);
       return params.get(param);
     }
+
     const articleId = getQueryParam('id');
     // Si se pasa "draft=true" se busca en borradores, de lo contrario en artículos publicados
     const isDraft = getQueryParam('draft') === 'true';
@@ -31,7 +34,9 @@
     } else {
       articles = JSON.parse(localStorage.getItem('articles') || '[]');
     }
+
     const article = articles.find(a => a.id === articleId);
+    
     if (article) {
       const previewDiv = document.getElementById('previewArticle');
       previewDiv.innerHTML = `
@@ -40,8 +45,17 @@
         <div>${article.content}</div>
         <p class="article-tags"><strong>Etiquetas:</strong> ${article.tags}</p>
       `;
+      // Mostrar el botón de editar si es un borrador
+      if (isDraft) {
+        document.getElementById('editArticleBtn').style.display = 'inline-block';
+      }
     } else {
       document.getElementById('previewArticle').innerHTML = '<p>Artículo no encontrado.</p>';
+    }
+
+    function editArticle() {
+      // Redirigir al editor pasando el id del artículo y draft=true para indicar que es un borrador
+      window.location.href = `editor.html?id=${articleId}&draft=true`;
     }
   </script>
 </body>
