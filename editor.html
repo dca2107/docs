@@ -35,6 +35,7 @@
         <button type="button" onclick="formatText('justifyCenter')" title="Centrar">↔️</button>
         <button type="button" onclick="formatText('justifyRight')" title="Alinear derecha">➡️</button>
         <button type="button" onclick="formatText('justifyFull')" title="Justificar">⚖️</button>
+        <button type="button" onclick="insertImage()" title="Insertar Imagen">🖼️</button>
         <button type="button" onclick="publishArticle()" title="Publicar">🚀</button>
         <button type="button" onclick="saveDraft()" title="Guardar borrador">💾</button>
       </div>
@@ -43,9 +44,14 @@
       <div id="editor" class="editor-area" contenteditable="true">
         Escribe aquí tu artículo...
       </div>
+
       <!-- Campo para etiquetas -->
       <label for="tags">Etiquetas (separadas por coma):</label>
       <input type="text" id="tags" placeholder="ej. política, economía, deportes">
+
+      <!-- Campo para cargar la imagen -->
+      <input type="file" id="imageInput" style="display: none;" accept="image/*">
+      <label for="imageInput" id="imageLabel" style="cursor: pointer;">Subir Imagen</label>
     </section>
   </main>
 
@@ -55,6 +61,95 @@
     if (!localStorage.getItem('loggedIn')) {
       // Si no está autenticado, redirigir a la página pública
       window.location.href = "index.html";
+    }
+
+    // Función para formatear el texto
+    function formatText(command) {
+      document.execCommand(command, false, null);
+    }
+
+    // Función para insertar una imagen en el contenido del artículo
+    function insertImage() {
+      const imageInput = document.getElementById('imageInput');
+      imageInput.click(); // Simular clic en el input para cargar la imagen
+    }
+
+    // Cuando el usuario selecciona una imagen
+    document.getElementById('imageInput').addEventListener('change', function(event) {
+      const file = event.target.files[0];
+      if (file) {
+        const reader = new FileReader();
+        
+        reader.onload = function(e) {
+          const img = new Image();
+          img.src = e.target.result;
+          img.style.maxWidth = '100%'; // Ajustar la imagen al tamaño del contenedor
+          
+          // Insertar la imagen en la posición actual del cursor
+          const editor = document.getElementById('editor');
+          const caption = prompt("Escribe el epígrafe para la imagen:");
+          
+          // Crear un contenedor para la imagen y su epígrafe
+          const imageWrapper = document.createElement('div');
+          imageWrapper.style.textAlign = 'center';
+          
+          // Insertar la imagen
+          imageWrapper.appendChild(img);
+          
+          // Insertar el epígrafe si se proporcionó
+          if (caption) {
+            const captionElement = document.createElement('p');
+            captionElement.style.fontSize = '0.9em';
+            captionElement.style.color = '#555';
+            captionElement.innerText = caption;
+            imageWrapper.appendChild(captionElement);
+          }
+
+          // Insertar el contenedor con la imagen y epígrafe en el área de edición
+          editor.appendChild(imageWrapper);
+        };
+
+        reader.readAsDataURL(file); // Convertir la imagen a base64
+      }
+    });
+
+    // Función para guardar el borrador
+    function saveDraft() {
+      const title = document.getElementById('articleTitle').value;
+      const content = document.getElementById('editor').innerHTML;
+      const tags = document.getElementById('tags').value.split(',');
+
+      const draft = {
+        title: title,
+        content: content,
+        tags: tags,
+        date: new Date().toLocaleString(),
+      };
+
+      // Guardar el borrador en localStorage
+      let drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+      drafts.push(draft);
+      localStorage.setItem('drafts', JSON.stringify(drafts));
+      alert('Borrador guardado');
+    }
+
+    // Función para publicar el artículo
+    function publishArticle() {
+      const title = document.getElementById('articleTitle').value;
+      const content = document.getElementById('editor').innerHTML;
+      const tags = document.getElementById('tags').value.split(',');
+
+      const article = {
+        title: title,
+        content: content,
+        tags: tags,
+        date: new Date().toLocaleString(),
+        published: true,
+      };
+
+      // Aquí podrías enviar el artículo a un servidor o procesarlo de alguna manera
+      console.log('Artículo publicado:', article);
+      alert('Artículo publicado');
     }
   </script>
 </body>
