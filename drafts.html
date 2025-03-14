@@ -18,6 +18,21 @@
         <!-- Se cargarán los borradores -->
       </div>
     </section>
+    <section id="createDraftSection">
+      <h2>Crear un Nuevo Borrador</h2>
+      <form id="draftForm">
+        <label for="draftTitle">Título:</label>
+        <input type="text" id="draftTitle" required>
+        
+        <label for="draftImage">Imagen:</label>
+        <input type="file" id="draftImage" accept="image/*">
+        
+        <label for="draftCaption">Epígrafe:</label>
+        <textarea id="draftCaption"></textarea>
+        
+        <button type="submit">Guardar Borrador</button>
+      </form>
+    </section>
     <a href="index.html">Volver al inicio</a>
   </main>
   <script>
@@ -27,14 +42,81 @@
       let html = '';
       drafts.forEach(draft => {
         html += `
-          <div class="article-item" onclick="window.location.href='preview.html?id=${draft.id}&draft=true'">
+          <div class="article-item">
             <h3>${draft.title}</h3>
             <p class="article-date">${draft.date}</p>
+            ${draft.image ? `<img src="${draft.image}" alt="Imagen del artículo" class="article-image">` : ''}
+            ${draft.caption ? `<p class="article-caption">${draft.caption}</p>` : ''}
+            <button onclick="publishDraft(${draft.id})">Publicar</button>
+            <a href="preview.html?id=${draft.id}&draft=true">Ver borrador</a>
           </div>
         `;
       });
       draftsListDiv.innerHTML = html;
     }
+
+    function publishDraft(draftId) {
+      const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+      const draftIndex = drafts.findIndex(draft => draft.id === draftId);
+      if (draftIndex !== -1) {
+        drafts[draftIndex].published = true;
+        localStorage.setItem('drafts', JSON.stringify(drafts));
+        loadDrafts();
+      }
+    }
+
+    document.getElementById('draftForm').addEventListener('submit', function(event) {
+      event.preventDefault(); // Evitar el envío del formulario
+      
+      const title = document.getElementById('draftTitle').value;
+      const imageInput = document.getElementById('draftImage');
+      const caption = document.getElementById('draftCaption').value;
+
+      // Generar un ID único para cada borrador
+      const draftId = Date.now();
+      
+      // Obtener la imagen seleccionada (si hay una)
+      let imageUrl = '';
+      if (imageInput.files && imageInput.files[0]) {
+        const reader = new FileReader();
+        reader.onload = function(e) {
+          imageUrl = e.target.result; // URL de la imagen cargada
+          
+          // Obtener la lista de borradores, agregar el nuevo y guardarlo
+          const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+          const newDraft = {
+            id: draftId,
+            title: title,
+            date: new Date().toLocaleString(),
+            image: imageUrl,
+            caption: caption,
+            published: false
+          };
+          drafts.push(newDraft);
+          localStorage.setItem('drafts', JSON.stringify(drafts));
+
+          loadDrafts(); // Recargar los borradores
+        };
+
+        reader.readAsDataURL(imageInput.files[0]); // Leer la imagen como URL
+      } else {
+        // Si no hay imagen, solo guardar el borrador sin ella
+        const drafts = JSON.parse(localStorage.getItem('drafts') || '[]');
+        const newDraft = {
+          id: draftId,
+          title: title,
+          date: new Date().toLocaleString(),
+          image: '',
+          caption: caption,
+          published: false
+        };
+        drafts.push(newDraft);
+        localStorage.setItem('drafts', JSON.stringify(drafts));
+
+        loadDrafts(); // Recargar los borradores
+      }
+    });
+
     loadDrafts();
   </script>
 </body>
